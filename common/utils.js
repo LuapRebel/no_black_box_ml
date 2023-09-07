@@ -1,34 +1,29 @@
 const utils = {};
 
-utils.flaggedUsers =
-   [1663882102141, 1663900040545, 1664485938220];
+utils.flaggedUsers = [1663882102141, 1663900040545, 1664485938220, 1664485938220, 1682255271235];
 
 utils.styles = {
-   car: { color: 'gray', text: '🚗' },
-   fish: { color: 'red', text: '🐠' },
-   house: { color: 'yellow', text: '🏠' },
-   tree: { color: 'green', text: '🌳' },
-   bicycle: { color: 'cyan', text: '🚲' },
-   guitar: { color: 'blue', text: '🎸' },
-   pencil: { color: 'magenta', text: '✏️' },
-   clock: { color: 'lightgray', text: '🕒' },
+   car: { color: "gray", text: "🚗" },
+   fish: { color: "red", text: "🐠" },
+   house: { color: "yellow", text: "🏠" },
+   tree: { color: "green", text: "🌳" },
+   bicycle: { color: "cyan", text: "🚲" },
+   guitar: { color: "blue", text: "🎸" },
+   pencil: { color: "magenta", text: "✏️" },
+   clock: { color: "lightgray", text: "🕒" },
 };
-utils.styles['?'] = { color: 'red', text: '❓' };
+utils.styles["?"] = { color: "red", text: "❓" };
 
 utils.formatPercent = (n) => {
    return (n * 100).toFixed(2) + "%";
-}
+};
 
 utils.printProgress = (count, max) => {
    process.stdout.clearLine();
    process.stdout.cursorTo(0);
-   const percent = utils.formatPercent(
-      count / max
-   );
-   process.stdout.write(count + "/" + max +
-      " (" + percent + ")"
-   );
-}
+   const percent = utils.formatPercent(count / max);
+   process.stdout.write(count + "/" + max + " (" + percent + ")");
+};
 
 utils.groupBy = (objArray, key) => {
    const groups = {};
@@ -40,28 +35,26 @@ utils.groupBy = (objArray, key) => {
       groups[val].push(obj);
    }
    return groups;
-}
+};
 
 utils.distance = (p1, p2) => {
-   return Math.sqrt(
-      (p1[0] - p2[0]) ** 2 +
-      (p1[1] - p2[1]) ** 2
-   );
-}
+   return Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2);
+};
+
 utils.getNearest = (loc, points, k = 1) => {
    const obj = points.map((val, ind) => {
-      return { ind, val }
+      return { ind, val };
    });
    const sorted = obj.sort((a, b) => {
-      return utils.distance(loc, a.val) - utils.distance(loc, b.val)
+      return utils.distance(loc, a.val) - utils.distance(loc, b.val);
    });
    const indices = sorted.map((obj) => obj.ind);
    return indices.slice(0, k);
-}
+};
 
 utils.invLerp = (a, b, v) => {
    return (v - a) / (b - a);
-}
+};
 
 utils.normalizePoints = (points, minMax) => {
    let min, max;
@@ -85,7 +78,7 @@ utils.normalizePoints = (points, minMax) => {
       }
    }
    return { min, max };
-}
+};
 
 utils.toCSV = (headers, samples) => {
    let str = headers.join(",") + "\n";
@@ -93,8 +86,8 @@ utils.toCSV = (headers, samples) => {
       str += sample.join(",") + "\n";
    }
    return str;
-}
+};
 
-if (typeof module !== 'undefined') {
+if (typeof module !== "undefined") {
    module.exports = utils;
 }

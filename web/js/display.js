@@ -16,16 +16,15 @@ function createRow(container, studentName, samples) {
       sampleContainer.onclick = () => handleClick(sample, false);
       sampleContainer.classList.add("sampleContainer");
       if (correct) {
-         sampleContainer.style.backgroundColor = 'lightgreen';
+         sampleContainer.style.backgroundColor = "#006";
       }
 
       const sampleLabel = document.createElement("div");
       sampleLabel.innerHTML = label;
       sampleContainer.appendChild(sampleLabel);
 
-      const img = document.createElement('img');
-      img.setAttribute("loading", "lazy");
-      img.src = constants.IMG_DIR + '/' + id + '.png';
+      const img = document.createElement("img");
+      img.src = constants.IMG_DIR + "/" + id + ".png";
       img.classList.add("thumb");
       if (utils.flaggedUsers.includes(student_id)) {
          img.classList.add("blur");
@@ -38,35 +37,36 @@ function createRow(container, studentName, samples) {
 
 function handleClick(sample, doScroll = true) {
    if (sample == null) {
-      [...document.querySelectorAll(".emphasize")].
-         forEach((e) => e.classList.remove("emphasize"));
+      [...document.querySelectorAll(".emphasize")].forEach((e) =>
+         e.classList.remove("emphasize")
+      );
+      return;
    }
-   const el = document.getElementById(
-      "sample_" + sample.id
-   );
+   const el = document.getElementById("sample_" + sample.id);
    if (el.classList.contains("emphasize")) {
       el.classList.remove("emphasize");
       chart.selectSample(null);
       return;
    }
-   [...document.querySelectorAll(".emphasize")].
-      forEach((e) => e.classList.remove("emphasize"));
+   [...document.querySelectorAll(".emphasize")].forEach((e) =>
+      e.classList.remove("emphasize")
+   );
    el.classList.add("emphasize");
    if (doScroll) {
       el.scrollIntoView({
-         behavior: 'auto',
-         block: 'center'
+         behavior: "auto",
+         block: "center",
       });
    }
    chart.selectSample(sample);
 }
 
 function toggleInput() {
-   if (inputContainer.style.display == 'none') {
-      inputContainer.style.display = 'block';
+   if (inputContainer.style.display == "none") {
+      inputContainer.style.display = "block";
       sketchPad.triggerUpdate();
    } else {
-      inputContainer.style.display = 'none';
+      inputContainer.style.display = "none";
       chart.hideDynamicPoint();
    }
 }
